@@ -149,7 +149,7 @@ local function projects(opts)
     finder = create_finder(),
     previewer = false,
     sorter = telescope_config.generic_sorter(opts),
-    attach_mappings = function(_prompt_bufnr, map)
+    attach_mappings = function(prompt_bufnr, map)
       map("n", "f", find_project_files)
       map("n", "b", browse_project_files)
       map("n", "d", delete_project)
@@ -164,10 +164,10 @@ local function projects(opts)
       map("i", "<c-r>", recent_project_files)
       map("i", "<c-w>", change_working_directory)
 
-      -- local on_project_selected = function()
-      --   find_project_files(prompt_bufnr)
-      -- end
-      -- actions.select_default:replace(on_project_selected)
+      local on_project_selected = function()
+        -- find_project_files(prompt_bufnr)
+      end
+      actions.select_default:replace(on_project_selected)
       return true
     end,
   }):find()
